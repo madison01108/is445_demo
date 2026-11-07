@@ -44,7 +44,7 @@ points =(alt.Chart()
                 alt.Y("sqft:Q", title="Square Footage", scale=alt.Scale(type="log")),
                 color=alt.condition(brush, color, alt.value("lightgray")),
                 size=alt.Size("floors:Q", scale=alt.Scale(range=[10, 200]), title="Total Floors for Building"),
-            ).properties(width= "container", height =500)
+            ).properties(width= 800, height =500)
             .add_params(brush)
             .transform_filter(click)
 )
@@ -61,17 +61,17 @@ bars = (
         tooltip=['agency:N', 'count()'],
     )
     .transform_filter(brush)
-    .properties(width="container", height=350)
+    .properties(width=650, height=350)
     .add_params(click)
 )
 
 chart =alt.vconcat(points, bars, data=df, title = "Illinois Buildings Visualizations")
 tab1,tab2=st.tabs(["Streamlit theme(default)","Altair native theme"])
 with tab1:
-    st.altair_chart(chart, theme='streamlit',use_container_width=True)
+    st.altair_chart(chart, theme='streamlit',use_container_width=False)
 
 with tab2:
-    st.altair_chart(chart, theme=None,use_container_width=True)
+    st.altair_chart(chart, theme=None,use_container_width=False)
     
 
 st.header("Homework 6: Streamlit Write Up")
